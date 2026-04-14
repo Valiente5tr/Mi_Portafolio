@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Juan Valentin Arenas — Tecnico en programacion - Hero section</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Press Start 2P (Minecraft) + Inter + Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- EmailJS SDK — permite enviar emails desde el navegador sin backend -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -31,6 +32,11 @@
         <li><a href="#contacto"   class="nav-link">Contacto</a></li>
       </ul>
 
+      <!-- Toggle modo claro/oscuro -->
+      <button id="theme-btn" class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+        <span id="theme-icon">🌙</span>
+      </button>
+
       <button id="menu-btn" class="nav-toggle" aria-label="Abrir menú">
         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
@@ -40,6 +46,12 @@
 
     <!-- Menú móvil -->
     <div id="mobile-menu" class="nav-mobile">
+      <!-- Logo en el menú móvil — reemplaza src con tu imagen de logo -->
+      <img
+        src="css/waos.png"
+        alt="Logo Valiente5tr"
+        class="nav-logo-mobile"
+      />
       <a href="#inicio">Inicio</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proyectos">Proyectos</a>
@@ -53,7 +65,7 @@
   <section id="inicio" class="hero">
     <div class="hero-content">
       <p class="hero-eyebrow">Hola, mi nombre es</p>
-      <h1 class="hero-title">Juan Valentin Arenas</h1>
+      <h1 class="hero-title" data-text="Juan Valentin Arenas">Juan Valentin Arenas</h1>
       <h2 class="hero-subtitle">
         Desarrollador <span id="typed-text"></span>
       </h2>
@@ -280,6 +292,41 @@
   <script src="js/config.js"></script>
   <!-- Lógica principal -->
   <script src="js/main.js"></script>
+
+  <!-- Toggle modo claro / oscuro -->
+  <script>
+    (function () {
+      const btn  = document.getElementById('theme-btn');
+      const icon = document.getElementById('theme-icon');
+      const root = document.documentElement;
+
+      // Leer preferencia guardada o usar preferencia del sistema
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        root.setAttribute('data-theme', saved);
+        icon.textContent = saved === 'dark' ? '🌙' : '☀️';
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        icon.textContent = prefersDark ? '🌙' : '☀️';
+      }
+
+      btn.addEventListener('click', function () {
+        const current = root.getAttribute('data-theme');
+        const isDark  = current === 'dark' ||
+                        (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        if (isDark) {
+          root.setAttribute('data-theme', 'light');
+          icon.textContent = '☀️';
+          localStorage.setItem('theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          icon.textContent = '🌙';
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>

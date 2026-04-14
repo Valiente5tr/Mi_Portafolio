@@ -1,40 +1,103 @@
 /* ═══════════════════════════════════════════════════════════════════
-   style.css — Estilos base del portafolio
-
-   TAREA COMPLEMENTARIA:
-   Estos estilos son funcionales pero intencionalmente simples.
-   Tu reto es mejorar la interfaz. Algunas ideas:
-     - Animaciones de entrada al hacer scroll
-     - Transiciones y efectos hover más elaborados
-     - Paleta de colores propia (modifica las variables de :root)
-     - Modo claro / oscuro con prefers-color-scheme
-     - Tipografía más expresiva
-     - Versión responsive más detallada (tablet, desktop grande)
+   style.css — Portafolio con tema Minecraft/Pixel + Blues
+   - Paleta de azules (dark & light)
+   - Fuente Press Start 2P (Minecraft)
+   - Animaciones y transiciones elaboradas
+   - Modo claro / oscuro (prefers-color-scheme + toggle manual)
+   - Responsive: mobile, tablet, desktop, wide
    ═══════════════════════════════════════════════════════════════════ */
 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
 
-/* ── Variables CSS ───────────────────────────────────────────────────
-   Modifica estos valores para cambiar el tema completo del sitio.
-   ─────────────────────────────────────────────────────────────── */
+
+/* ── Variables — Modo oscuro (default) ───────────────────────────── */
 :root {
-  /* Colores */
-  --color-bg:           #0f172a;
-  --color-surface:      #1e293b;
-  --color-border:       #334155;
-  --color-primary:      #6366f1;
-  --color-primary-dark: #4f46e5;
-  --color-text:         #e2e8f0;
-  --color-text-muted:   #94a3b8;
+  /* Paleta de azules oscuros */
+  --color-bg:            #020c18;
+  --color-surface:       #041426;
+  --color-surface-2:     #071e38;
+  --color-border:        #0a2a4a;
+  --color-border-bright: #1a4a7a;
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-primary-light: #60a5fa;
+  --color-accent:        #38bdf8;
+  --color-text:          #e2eeff;
+  --color-text-muted:    #7eb8f7;
+  --color-glow:          rgba(37, 99, 235, 0.45);
+  --color-glow-soft:     rgba(96, 165, 250, 0.15);
+  --color-navbar-bg:     rgba(2, 12, 24, 0.94);
 
   /* Tipografía */
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-mono:  'Fira Code', monospace;
 
   /* Layout */
-  --max-width:      1100px;
-  --nav-height:     64px;
-  --section-pad:    80px 24px;
-  --radius:         8px;
+  --max-width:   1100px;
+  --nav-height:  64px;
+  --section-pad: 80px 24px;
+  --radius:      6px;
+  --radius-lg:   12px;
+
+  /* Transición global */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Modo claro automático ───────────────────────────────────────── */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg:            #f0f8ff;
+    --color-surface:       #dbeafe;
+    --color-surface-2:     #bfdbfe;
+    --color-border:        #93c5fd;
+    --color-border-bright: #3b82f6;
+    --color-primary:       #1d4ed8;
+    --color-primary-dark:  #1e40af;
+    --color-primary-light: #3b82f6;
+    --color-accent:        #0284c7;
+    --color-text:          #0f172a;
+    --color-text-muted:    #1e40af;
+    --color-glow:          rgba(29, 78, 216, 0.3);
+    --color-glow-soft:     rgba(29, 78, 216, 0.08);
+    --color-navbar-bg:     rgba(240, 248, 255, 0.94);
+  }
+}
+
+/* ── Toggle manual: fuerza modo claro ─────────────────────────────── */
+[data-theme="light"] {
+  --color-bg:            #f0f8ff;
+  --color-surface:       #dbeafe;
+  --color-surface-2:     #bfdbfe;
+  --color-border:        #93c5fd;
+  --color-border-bright: #3b82f6;
+  --color-primary:       #1d4ed8;
+  --color-primary-dark:  #1e40af;
+  --color-primary-light: #3b82f6;
+  --color-accent:        #0284c7;
+  --color-text:          #0f172a;
+  --color-text-muted:    #1e40af;
+  --color-glow:          rgba(29, 78, 216, 0.3);
+  --color-glow-soft:     rgba(29, 78, 216, 0.08);
+  --color-navbar-bg:     rgba(240, 248, 255, 0.94);
+}
+
+/* ── Toggle manual: fuerza modo oscuro ────────────────────────────── */
+[data-theme="dark"] {
+  --color-bg:            #020c18;
+  --color-surface:       #041426;
+  --color-surface-2:     #071e38;
+  --color-border:        #0a2a4a;
+  --color-border-bright: #1a4a7a;
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-primary-light: #60a5fa;
+  --color-accent:        #38bdf8;
+  --color-text:          #e2eeff;
+  --color-text-muted:    #7eb8f7;
+  --color-glow:          rgba(37, 99, 235, 0.45);
+  --color-glow-soft:     rgba(96, 165, 250, 0.15);
+  --color-navbar-bg:     rgba(2, 12, 24, 0.94);
 }
 
 
@@ -54,6 +117,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   line-height: 1.6;
+  transition: background-color var(--transition), color var(--transition);
 }
 
 a {
@@ -72,15 +136,90 @@ img {
 }
 
 
-/* ── Navegación ───────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════════════════════════ */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Parpadeo de cursor tipo terminal */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Pulso de glow para botón primario */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--color-glow); }
+  50%       { box-shadow: 0 0 24px var(--color-glow), 0 0 48px var(--color-glow-soft); }
+}
+
+/* Entrada desde abajo con fade */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Efecto glitch en el hero title */
+@keyframes glitch-1 {
+  0%  { clip-path: inset(0 0 96% 0); transform: translate(-3px, 0); }
+  20% { clip-path: inset(30% 0 50% 0); transform: translate(3px, 0); }
+  40% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
+  60% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 0); }
+  80% { clip-path: inset(50% 0 30% 0); transform: translate(-1px, 0); }
+  100%{ clip-path: inset(96% 0 0 0);   transform: translate(0, 0); }
+}
+
+@keyframes glitch-2 {
+  0%  { clip-path: inset(96% 0 0 0);   transform: translate(3px, 0); color: var(--color-accent); }
+  20% { clip-path: inset(10% 0 80% 0); transform: translate(-3px, 0); }
+  40% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); color: var(--color-primary-light); }
+  60% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
+  80% { clip-path: inset(30% 0 50% 0); transform: translate(1px, 0); color: var(--color-accent); }
+  100%{ clip-path: inset(0 0 96% 0);   transform: translate(0, 0); }
+}
+
+/* Línea decorativa animada */
+@keyframes line-grow {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+
+/* Float suave para el avatar */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Shimmer en skill tags */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Pixel blink para el cursor del typing */
+@keyframes pixel-cursor {
+  0%, 49% { border-right-color: var(--color-primary); }
+  50%, 100%{ border-right-color: transparent; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   NAVEGACIÓN
+   ═══════════════════════════════════════════════════════════════════ */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   height: var(--nav-height);
-  background-color: rgba(15, 23, 42, 0.92);
+  background-color: var(--color-navbar-bg);
   border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 100;
+  transition: background-color var(--transition), border-color var(--transition);
 }
 
 .nav-container {
@@ -91,13 +230,24 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
+/* Brand / logo texto — fuente Minecraft */
 .nav-brand {
-  font-family: var(--font-mono);
-  color: var(--color-primary);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-family: var(--font-pixel);
+  color: var(--color-primary-light);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 12px var(--color-glow);
+  transition: color var(--transition), text-shadow var(--transition);
+  white-space: nowrap;
+}
+
+.nav-brand:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 20px var(--color-glow), 0 0 40px var(--color-glow-soft);
 }
 
 .nav-links {
@@ -105,10 +255,27 @@ img {
   gap: 32px;
 }
 
+/* Links con subrayado animado */
 .nav-link {
   color: var(--color-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
+  position: relative;
+  transition: color var(--transition);
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary-light);
+  border-radius: 1px;
+  transition: width var(--transition);
+  box-shadow: 0 0 6px var(--color-glow);
 }
 
 .nav-link:hover,
@@ -116,6 +283,36 @@ img {
   color: var(--color-text);
 }
 
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Botón toggle tema */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  border-radius: var(--radius);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition),
+              background-color var(--transition), box-shadow var(--transition);
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary-light);
+  color: var(--color-primary-light);
+  box-shadow: 0 0 10px var(--color-glow-soft);
+}
+
+/* Hamburger */
 .nav-toggle {
   display: none;
   background: none;
@@ -124,105 +321,176 @@ img {
   cursor: pointer;
   padding: 4px;
   line-height: 0;
+  transition: color var(--transition);
 }
 
-/* Menú desplegable en móvil */
+.nav-toggle:hover {
+  color: var(--color-primary-light);
+}
+
+/* ── Menú móvil ─────────────────────────────────────────────────── */
 .nav-mobile {
   display: none;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
   padding: 16px 24px;
-  background-color: rgba(15, 23, 42, 0.97);
+  background-color: var(--color-navbar-bg);
   border-top: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .nav-mobile.open {
   display: flex;
 }
 
+/* Logo en el menú móvil */
+.nav-logo-mobile {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--radius);
+  image-rendering: pixelated;     /* mantiene pixeles nítidos si es pixel art */
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 0 8px var(--color-glow));
+  margin-bottom: 8px;
+  align-self: center;
+  border: 2px solid var(--color-border);
+  transition: filter var(--transition), border-color var(--transition),
+              transform var(--transition);
+}
+
+.nav-logo-mobile:hover {
+  filter: drop-shadow(0 0 16px var(--color-primary-light));
+  border-color: var(--color-primary-light);
+  transform: scale(1.05);
+}
+
 .nav-mobile a {
   color: var(--color-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  transition: color var(--transition), background-color var(--transition);
 }
 
 .nav-mobile a:hover {
   color: var(--color-text);
+  background-color: var(--color-glow-soft);
 }
 
 
-/* ── Botones ──────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   BOTONES
+   ═══════════════════════════════════════════════════════════════════ */
 .btn {
   display: inline-block;
   padding: 11px 28px;
   border-radius: var(--radius);
-  font-size: 0.95rem;
-  font-weight: 500;
-  border: 1px solid transparent;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-pixel);
+  letter-spacing: 0.03em;
+  border: 2px solid transparent;
   cursor: pointer;
-  font-family: var(--font-sans);
+  transition: background-color var(--transition), border-color var(--transition),
+              color var(--transition), box-shadow var(--transition),
+              transform var(--transition);
+  line-height: 1.6;
+}
+
+.btn:active {
+  transform: scale(0.96) translateY(2px);
 }
 
 .btn-primary {
   background-color: var(--color-primary);
   color: #fff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-glow);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 20px var(--color-glow), 0 0 40px var(--color-glow-soft);
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 
 .btn-primary:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
+  animation: none;
 }
 
 .btn-outline {
   background-color: transparent;
   color: var(--color-text);
-  border-color: var(--color-border);
+  border-color: var(--color-border-bright);
 }
 
 .btn-outline:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary-light);
+  box-shadow: 0 0 12px var(--color-glow-soft);
 }
 
 
-/* ── Secciones ────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   SECCIONES
+   ═══════════════════════════════════════════════════════════════════ */
 .section {
   padding: var(--section-pad);
   padding-top: 80px;
 }
 
-/* La primera sección necesita compensar la navbar fija */
 #inicio {
   padding-top: 0;
 }
 
 .section-alt {
   background-color: var(--color-surface);
+  background-image: radial-gradient(
+    ellipse at 20% 50%,
+    var(--color-glow-soft) 0%,
+    transparent 60%
+  );
 }
 
+/* Título de sección — fuente Minecraft */
 .section-title {
   text-align: center;
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 48px;
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  margin-bottom: 56px;
+  color: var(--color-text);
 }
 
-/* Línea decorativa bajo el título */
+/* Línea decorativa con animación al ser visible */
 .section-title::after {
   content: '';
   display: block;
-  width: 40px;
+  width: 0;
   height: 3px;
-  background-color: var(--color-primary);
-  margin: 10px auto 0;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  margin: 14px auto 0;
   border-radius: 2px;
+  box-shadow: 0 0 8px var(--color-glow);
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cuando la sección es visible, la línea crece */
+.section-title.line-visible::after {
+  width: 60px;
 }
 
 
-/* ── Hero ─────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -230,47 +498,108 @@ img {
   justify-content: center;
   text-align: center;
   padding: 0 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo animado con gradiente de azules */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Cuadrícula tipo pixel de fondo */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.15;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
 }
 
 .hero-content {
-  max-width: 640px;
+  max-width: 680px;
+  position: relative;
+  z-index: 1;
+  animation: slide-up 0.8s ease both;
 }
 
 .hero-eyebrow {
   font-family: var(--font-mono);
-  color: var(--color-primary);
-  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 16px;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
 }
 
+/* Título principal — fuente Minecraft con efecto glitch */
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-family: var(--font-pixel);
+  font-size: 2rem;
+  font-weight: 400;
   color: #fff;
-  line-height: 1.15;
-  margin-bottom: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  position: relative;
+  text-shadow: 0 0 30px var(--color-glow), 0 0 60px var(--color-glow-soft);
+}
+
+/* Capas de glitch — sólo se activan al hacer hover en el hero */
+.hero-title::before,
+.hero-title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.hero:hover .hero-title::before {
+  opacity: 0.7;
+  color: var(--color-accent);
+  animation: glitch-1 0.4s steps(1) 1;
+}
+
+.hero:hover .hero-title::after {
+  opacity: 0.7;
+  color: var(--color-primary-light);
+  animation: glitch-2 0.4s steps(1) 1;
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 300;
   color: var(--color-text-muted);
   margin-bottom: 20px;
-  min-height: 2rem; /* evita salto de layout durante el tipeo */
+  min-height: 2rem;
 }
 
 .hero-subtitle span {
-  color: var(--color-primary);
+  color: var(--color-primary-light);
   font-weight: 500;
+  border-right: 2px solid var(--color-primary);
+  animation: pixel-cursor 0.8s step-end infinite;
+  padding-right: 2px;
 }
 
 .hero-description {
   color: var(--color-text-muted);
   font-size: 1rem;
   line-height: 1.8;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .hero-actions {
@@ -281,7 +610,9 @@ img {
 }
 
 
-/* ── Sobre mí ─────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   SOBRE MÍ
+   ═══════════════════════════════════════════════════════════════════ */
 .about-grid {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -291,13 +622,22 @@ img {
   margin: 0 auto;
 }
 
+/* Avatar con animación float */
 .about-avatar {
   width: 180px;
   height: 180px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border-bright);
   flex-shrink: 0;
+  box-shadow: 0 0 20px var(--color-glow-soft);
+  animation: float 6s ease-in-out infinite;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.about-avatar:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 30px var(--color-glow);
 }
 
 .about-bio p {
@@ -313,18 +653,54 @@ img {
   margin-top: 20px;
 }
 
+/* Skill tags con shimmer al hover */
 .skill-tag {
-  padding: 5px 14px;
+  padding: 6px 14px;
   border-radius: 4px;
-  background-color: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
-  font-size: 0.8rem;
+  background-color: var(--color-glow-soft);
+  border: 1px solid var(--color-border-bright);
+  color: var(--color-primary-light);
+  font-size: 0.78rem;
   font-weight: 500;
+  font-family: var(--font-mono);
+  cursor: default;
+  transition: border-color var(--transition), box-shadow var(--transition),
+              color var(--transition), transform var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-glow);
+  transform: translateY(-2px);
+}
+
+.skill-tag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.12) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.skill-tag:hover::before {
+  opacity: 1;
+  animation: shimmer 0.6s ease forwards;
 }
 
 
-/* ── Proyectos ────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTOS
+   ═══════════════════════════════════════════════════════════════════ */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -334,28 +710,57 @@ img {
 }
 
 .project-card {
-  background-color: var(--color-bg);
+  background-color: var(--color-surface-2);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 24px;
+  border-radius: var(--radius-lg);
+  padding: 28px;
   display: flex;
   flex-direction: column;
+  transition: border-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Línea de color superior al hover */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-border-bright);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px var(--color-glow-soft), 0 0 0 1px var(--color-border-bright);
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
 }
 
 .project-icon {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 6px var(--color-glow-soft));
 }
 
+/* Título de proyecto — fuente Minecraft pequeña */
 .project-title {
-  color: #fff;
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 10px;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
 }
 
 .project-description {
@@ -376,10 +781,17 @@ img {
 .tech-tag {
   padding: 3px 10px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(37, 99, 235, 0.08);
+  border: 1px solid var(--color-border);
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-family: var(--font-mono);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.project-card:hover .tech-tag {
+  border-color: var(--color-border-bright);
+  color: var(--color-primary-light);
 }
 
 .project-links {
@@ -390,10 +802,12 @@ img {
 }
 
 .project-links a {
-  color: var(--color-primary);
+  color: var(--color-primary-light);
+  transition: color var(--transition), text-decoration-color var(--transition);
 }
 
 .project-links a:hover {
+  color: var(--color-accent);
   text-decoration: underline;
 }
 
@@ -401,8 +815,14 @@ img {
   color: var(--color-text-muted);
 }
 
+.project-links a.secondary:hover {
+  color: var(--color-text);
+}
 
-/* ── Formulario de contacto ───────────────────────────────────────── */
+
+/* ═══════════════════════════════════════════════════════════════════
+   FORMULARIO DE CONTACTO
+   ═══════════════════════════════════════════════════════════════════ */
 .contact-wrapper {
   max-width: 540px;
   margin: 0 auto;
@@ -427,33 +847,39 @@ img {
 }
 
 .form-group label {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--color-text-muted);
+  font-family: var(--font-mono);
 }
 
 .form-input {
   width: 100%;
-  padding: 11px 14px;
-  background-color: var(--color-surface);
+  padding: 12px 16px;
+  background-color: var(--color-surface-2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   color: var(--color-text);
   font-size: 0.95rem;
   font-family: var(--font-sans);
   outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition),
+              background-color var(--transition);
 }
 
 .form-input::placeholder {
-  color: #475569;
+  color: var(--color-text-muted);
+  opacity: 0.5;
 }
 
 .form-input:focus {
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-glow-soft), 0 0 12px var(--color-glow-soft);
 }
 
 .form-input.error {
   border-color: #f87171;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15);
 }
 
 textarea.form-input {
@@ -463,7 +889,7 @@ textarea.form-input {
 
 .field-error {
   display: none;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #f87171;
 }
 
@@ -481,27 +907,28 @@ textarea.form-input {
 }
 
 
-/* ── Spinner de carga ─────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   SPINNER
+   ═══════════════════════════════════════════════════════════════════ */
 .spinner {
   display: none;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
 }
 
 .spinner.visible {
   display: block;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 
-
-/* ── Alertas de resultado ─────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   ALERTAS
+   ═══════════════════════════════════════════════════════════════════ */
 .alert {
   display: none;
   margin-top: 20px;
@@ -509,6 +936,7 @@ textarea.form-input {
   border-radius: var(--radius);
   font-size: 0.875rem;
   text-align: center;
+  animation: slide-up 0.3s ease;
 }
 
 .alert.visible {
@@ -516,26 +944,26 @@ textarea.form-input {
 }
 
 .alert-success {
-  background-color: rgba(34, 197, 94, 0.1);
+  background-color: rgba(34, 197, 94, 0.08);
   border: 1px solid rgba(34, 197, 94, 0.3);
   color: #86efac;
 }
 
 .alert-error {
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: rgba(239, 68, 68, 0.08);
   border: 1px solid rgba(239, 68, 68, 0.3);
   color: #fca5a5;
 }
 
 
-/* ── Animación reveal al hacer scroll ────────────────────────────────
-   JavaScript agrega .reveal a cada sección y luego .visible cuando
-   entra al viewport (Intersection Observer en main.js).
-   ─────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   REVEAL AL SCROLL
+   ═══════════════════════════════════════════════════════════════════ */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(32px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .reveal.visible {
@@ -543,33 +971,86 @@ textarea.form-input {
   transform: translateY(0);
 }
 
+/* Stagger para tarjetas de proyecto */
+.projects-grid .project-card:nth-child(1) { transition-delay: 0ms; }
+.projects-grid .project-card:nth-child(2) { transition-delay: 100ms; }
+.projects-grid .project-card:nth-child(3) { transition-delay: 200ms; }
 
-/* ── Footer ───────────────────────────────────────────────────────── */
+/* Stagger para skill tags */
+.skill-tag:nth-child(1)  { transition-delay: 0ms; }
+.skill-tag:nth-child(2)  { transition-delay: 40ms; }
+.skill-tag:nth-child(3)  { transition-delay: 80ms; }
+.skill-tag:nth-child(4)  { transition-delay: 120ms; }
+.skill-tag:nth-child(5)  { transition-delay: 160ms; }
+.skill-tag:nth-child(6)  { transition-delay: 200ms; }
+.skill-tag:nth-child(7)  { transition-delay: 240ms; }
+.skill-tag:nth-child(8)  { transition-delay: 280ms; }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════ */
 .footer {
-  padding: 32px 24px;
+  padding: 40px 24px;
   border-top: 1px solid var(--color-border);
   text-align: center;
   color: var(--color-text-muted);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+  background-color: var(--color-surface);
 }
 
 .footer-name {
-  color: var(--color-primary);
+  font-family: var(--font-pixel);
+  color: var(--color-primary-light);
+  font-size: 0.6rem;
+  text-shadow: 0 0 10px var(--color-glow);
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-top: 10px;
+  margin-top: 12px;
+}
+
+.footer-links a {
+  transition: color var(--transition);
 }
 
 .footer-links a:hover {
-  color: var(--color-text);
+  color: var(--color-primary-light);
 }
 
 
-/* ── Responsive ───────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile primero
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Móvil pequeño (<480px) ─────────────────────────────────────── */
+@media (max-width: 480px) {
+  :root {
+    --section-pad: 60px 16px;
+  }
+
+  .hero-title {
+    font-size: 1.1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 0.75rem;
+  }
+
+  .btn {
+    font-size: 0.6rem;
+    padding: 10px 18px;
+  }
+}
+
+/* ── Móvil (≤768px) ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .nav-links {
@@ -581,17 +1062,18 @@ textarea.form-input {
   }
 
   .hero-title {
-    font-size: 2.4rem;
+    font-size: 1.4rem;
   }
 
   .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .about-grid {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
+    gap: 32px;
   }
 
   .skills-list {
@@ -600,6 +1082,51 @@ textarea.form-input {
 
   .projects-grid {
     grid-template-columns: 1fr;
+    max-width: 460px;
+    margin: 0 auto;
   }
 
+  /* En móvil el stagger de cards se aplica de todas formas */
+  .projects-grid .project-card:nth-child(2) { transition-delay: 0ms; }
+  .projects-grid .project-card:nth-child(3) { transition-delay: 0ms; }
+}
+
+/* ── Tablet (769px – 1024px) ────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid .project-card:nth-child(3) { transition-delay: 0ms; }
+
+  .about-grid {
+    gap: 32px;
+  }
+
+  .about-avatar {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* ── Desktop grande (>1280px) ───────────────────────────────────── */
+@media (min-width: 1280px) {
+
+  :root {
+    --max-width: 1200px;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
 }

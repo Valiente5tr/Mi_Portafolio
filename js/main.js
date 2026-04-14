@@ -96,9 +96,12 @@ function initTypingEffect() {
 
 /* ─── REVEAL ON SCROLL (Intersection Observer) ──────────────────── */
 function initScrollReveal() {
-  // Agrega clase .reveal a las secciones para animar su entrada
+  // Agrega clase .reveal a las secciones y tarjetas para animar su entrada
   document.querySelectorAll('section').forEach(section => {
     section.classList.add('reveal');
+  });
+  document.querySelectorAll('.project-card, .about-grid, .skill-tag').forEach(el => {
+    el.classList.add('reveal');
   });
 
   const observer = new IntersectionObserver(
@@ -109,10 +112,24 @@ function initScrollReveal() {
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.12 }
   );
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Anima la línea decorativa de los títulos de sección
+  const titleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('line-visible');
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll('.section-title').forEach(el => titleObserver.observe(el));
 }
 
 
